@@ -19,26 +19,9 @@ const SidebarComponent = ({ props, callBack }) => {
       isShowSection: false,
     },
     {
-      id: 2,
-      title: "Clients",
-      path: RoutingPaths.clientList,
-      icon: "pi pi-user me-2",
-      subSections: [],
-      isShowSection: false,
-    },
-    
-    {
-        id: 5,
+        id: 2,
         title: "Business",
         path: RoutingPaths.businessList,
-        icon: "pi pi-building me-2",
-        subSections: [],
-        isShowSection: false,
-    },
-    {
-        id: 6,
-        title: "Bank Info",
-        path: RoutingPaths.bankDetailsList,
         icon: "pi pi-building me-2",
         subSections: [],
         isShowSection: false,

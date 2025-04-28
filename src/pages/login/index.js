@@ -57,7 +57,7 @@ const LoginPage = () => {
     //   setLoading(false);
     //   navigate(RoutingPaths.home);
 
-    // } catch (err) {
+    // } catch (err) {-
     //   toast.error(ToastMessages.loginError);
     //   <ToastContainer />
 
