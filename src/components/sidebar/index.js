@@ -153,7 +153,7 @@ const SidebarComponent = ({ props, callBack }) => {
                 textTransform: "capitalize",
                 paddingTop: ".6rem",
                 paddingBottom: "0.6rem",
-                marginTop: "16rem"
+                marginTop: "22.5rem"
               }}
             >
               <i className="pi pi-sign-out pe-2"></i>sign out

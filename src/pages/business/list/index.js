@@ -38,14 +38,6 @@ function BusinessList() {
   }
 
 
-
-  const countryName = (countries) => {
-    var countryObject = countryData.find(function (country) {
-      return country.id === countries.country.id;
-    });
-    return `${countryObject?.name}`;
-  };
-
   // MARK: Edit data function
   const tapOnEdit = (businessData) => () => {
     navigate(RoutingPaths.editBusiness, { state: businessData });
@@ -96,7 +88,6 @@ function BusinessList() {
     },
     { field: "email", header: InputHeading.business.email },
     { field: "phone", header: InputHeading.business.phone },
-    { field: "country", header: InputHeading.business.country, CardBody: countryName },
     { field: "state", header: InputHeading.business.state, className: "table__column__capital", },
     {
       field: "city",
@@ -109,7 +100,7 @@ function BusinessList() {
     },
     {
       field: "actions",
-      header: InputHeading.list.action,
+      header: InputHeading.business.action,
       CardBody: (data) => (
         <>
           <ListButtons

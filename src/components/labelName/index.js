@@ -14,6 +14,7 @@
     address: "street address",
     gst_no: "gst in (Optional)",
     tax: "tax ID",
+    action: "action",
   },
 };
 

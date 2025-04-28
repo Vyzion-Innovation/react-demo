@@ -45,24 +45,10 @@ const LoginPage = () => {
     return errors;
   };
 
-  
-
-
   const loginApi = async () => {
     setLoading(true);
+    localStorage.setItem("session", JSON.stringify(loginData));
     navigate(RoutingPaths.home);
-    // try {
-    
-    //   toast.success(ToastMessages.loginSuccess);
-    //   setLoading(false);
-    //   navigate(RoutingPaths.home);
-
-    // } catch (err) {-
-    //   toast.error(ToastMessages.loginError);
-    //   <ToastContainer />
-
-    //   setLoading(false);
-    // }
   };
 
   const tapOnSignIn = () => {

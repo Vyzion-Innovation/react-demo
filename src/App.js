@@ -14,17 +14,16 @@ import "./style.css";
 
 
 function App() {
+  let auth = localStorage.getItem("session");
 
   return (
     <Router>
       <Routes>
-        <Route path={RoutingPaths.login} element={<LoginPage />} />
         <Route element={<PrivateRoutes />}>
 
           <Route path="/" element={<Layout />}>
             <Route path={RoutingPaths.home} element={<Home />} />
 
-            {/* business routing paths */}
             <Route path={RoutingPaths.addBusiness} element={<BusinessPage />} />
             <Route path={RoutingPaths.editBusiness} element={<BusinessPage />} />
             <Route path={RoutingPaths.businessList} element={<BusinessList />} />
@@ -32,7 +31,7 @@ function App() {
           </Route>
         </Route>
         <Route path={RoutingPaths.login}
-          element={<LoginPage />} />
+          element={auth ? <Navigate to={RoutingPaths.home} /> : <LoginPage />} />
 
 
       </Routes>
