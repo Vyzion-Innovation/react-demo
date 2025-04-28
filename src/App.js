@@ -9,7 +9,9 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/login';
-import { RoutingPaths } from './components';
+import { Layout, RoutingPaths } from './components';
+import PrivateRoutes from './helper/privateRoute.js';
+import Home from './pages/home';
 import "./style.css";
 
 
@@ -20,6 +22,17 @@ function App() {
     <Router>
     <Routes>
       <Route path={RoutingPaths.login} element={<LoginPage />} />
+      <Route element={<PrivateRoutes />}>
+
+      <Route path="/" element={<Layout />}>
+        {/* Clients routing paths */}
+        <Route path={RoutingPaths.home} element={<Home />} />
+
+       
+      </Route>
+</Route>
+      <Route path={RoutingPaths.login}
+        element={<LoginPage />} />
 
 
     </Routes>
