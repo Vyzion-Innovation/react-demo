@@ -125,13 +125,13 @@ function BusinessPage() {
         setIsSubmitted(true);
         if (Object.keys(newErrors).length === 0) {
             setLoading2(true);
-            createApi(true);
+            createApi();
         }
     };
 
     async function setEditBusinessFunction() {
 
-    
+
 
         setBusinessData((prevState) => ({
             ...prevState,
@@ -171,55 +171,20 @@ function BusinessPage() {
 
     // MARK: API call
 
-    async function createApi(saveNext) {
-        const token = localStorage.getItem("token");
+    async function createApi() {
+        const session = localStorage.getItem("session");
         const writePayload = payload();
-console.log(writePayload)
-        // try {
-        //  const response =  await createBusiness(writePayload, token);
-
-        //  if (!response || response.status !== 200 || response.data?.success === false) {
-        //     const errorMessage =  "Failed to create business";
-        //     toast.error(errorMessage);
-        //     setLoading1(false);
-        //     setLoading2(false);
-        //     return;
-        // }
-
-        // toast.success(ToastMessages.businessAdd);
-        // setLoading1(false);
-        // setLoading2(false);
-        //   setTimeout(() => {
-        //     saveNext ?  navigate(RoutingPaths.addBusiness) : navigate(RoutingPaths.businessList);
-        // }, 1200);
-           
-        // } catch (error) {
-        //     toast.error(error);
-        //     <ToastContainer />
-        // }
+        if (session) {
+            localStorage.setItem("businessData", JSON.stringify(writePayload));
+        }
     }
 
     async function updateApi() {
-        const token = localStorage.getItem("token");
+        const session = localStorage.getItem("session");
         const updatePayload = payload();
-console.log(updatePayload)
-        // try {
-        //   const response =   await updateBusiness(businessID, updatePayload, token);
-        //     if (!response || response.status !== 200 || response.data?.success === false || response.error) {
-        //         const errorMessage =  "Update failed";
-        //         toast.error(errorMessage);
-        //     }
-
-        //     toast.success(ToastMessages.businessUpdate);
-
-        //     setTimeout(() => {
-        //         setLoading1(false);
-        //         navigate(RoutingPaths.businessList);
-        //     }, 1200);
-        // } catch (error) {
-        //     toast.error(error);
-        //     <ToastContainer />
-        // }
+        if (session) {
+            localStorage.setItem("businessData", JSON.stringify(updatePayload));
+        }
     }
 
     return (
@@ -272,7 +237,7 @@ console.log(updatePayload)
                                 classname="mb-3 mt-3"
                             />
 
-                         
+
                             <FormInput type="text"
                                 id="state"
                                 name="state"
