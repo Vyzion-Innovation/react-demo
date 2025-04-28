@@ -8,10 +8,7 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/login';
-import { Layout, RoutingPaths } from './components';
-import PrivateRoutes from './helper/privateRoute.js';
-import Home from './pages/home';
+import { BusinessList, BusinessPage, Home, Layout, LoginPage, PrivateRoutes, RoutingPaths } from './components';
 import "./style.css";
 
 
@@ -20,23 +17,26 @@ function App() {
 
   return (
     <Router>
-    <Routes>
-      <Route path={RoutingPaths.login} element={<LoginPage />} />
-      <Route element={<PrivateRoutes />}>
+      <Routes>
+        <Route path={RoutingPaths.login} element={<LoginPage />} />
+        <Route element={<PrivateRoutes />}>
 
-      <Route path="/" element={<Layout />}>
-        {/* Clients routing paths */}
-        <Route path={RoutingPaths.home} element={<Home />} />
+          <Route path="/" element={<Layout />}>
+            <Route path={RoutingPaths.home} element={<Home />} />
 
-       
-      </Route>
-</Route>
-      <Route path={RoutingPaths.login}
-        element={<LoginPage />} />
+            {/* business routing paths */}
+            <Route path={RoutingPaths.addBusiness} element={<BusinessPage />} />
+            <Route path={RoutingPaths.editBusiness} element={<BusinessPage />} />
+            <Route path={RoutingPaths.businessList} element={<BusinessList />} />
+
+          </Route>
+        </Route>
+        <Route path={RoutingPaths.login}
+          element={<LoginPage />} />
 
 
-    </Routes>
-  </Router>
+      </Routes>
+    </Router>
   );
 }
 
