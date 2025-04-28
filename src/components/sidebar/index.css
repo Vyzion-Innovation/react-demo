@@ -1,0 +1,148 @@
+.sidebar__company-logo {
+  margin: 1rem;
+  height: 7rem;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  z-index: 1035;
+}
+
+#sidebar__style {
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  height: 100%;
+  border-radius: unset;
+  -webkit-border-radius: unset;
+  -moz-border-radius: unset;
+  -ms-border-radius: unset;
+  -o-border-radius: unset;
+  -webkit-border-radius: unset;
+  z-index: 1035;
+}
+
+li {
+  text-transform: capitalize;
+  list-style: none;
+  color: var(--black-color);
+}
+
+i {
+  margin-right: .5rem;
+}
+
+p {
+  margin-left: 1.1rem;
+  margin-bottom: 0px;
+}
+
+a {
+  color: var(--white-color);
+}
+
+.sidebar__close {
+  display: none;
+  opacity: 0;
+  left: -500px;
+  pointer-events: none;
+  height: 100%;
+}
+
+.sidebar__open {
+  display: block;
+  width: 16rem;
+  height: 100%;
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  -o-border-radius: 0px;
+  box-shadow: 0 0.125rem 0.25rem rgba(8, 10, 12, 0.075);
+}
+
+.sidebar__cross_button {
+  display: none;
+}
+
+
+@media screen and (max-width: 650px) {
+  .sidebar__open {
+    z-index: 1;
+  }
+
+  .sidebar__background__blur {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 99999;
+  }
+}
+
+.sidebar__separator {
+  color: var(--white-color);
+  border: 0px solid var(--white-color);
+  margin-top: 0px;
+  margin: 0px;
+}
+
+.css-dip3t8 {
+  background-color: var(--black-color) !important;
+}
+
+.css-1t8x7v1>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-1tqrhto>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-16jesut>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-1cuxlhl {
+  color: var(--white-color) !important;
+}
+
+.css-18unl23 {
+  background-color: var(--black-color) !important;
+  color: var(--white-color) !important;
+}
+
+/* dropdown arrow  */
+.css-honxw6 {
+  transform: rotate(45deg) !important;
+  -webkit-transform: rotate(45deg) !important;
+  -moz-transform: rotate(45deg) !important;
+  -ms-transform: rotate(45deg) !important;
+  -o-transform: rotate(45deg) !important;
+}
+
+.css-12w9als {
+  color: var(--white-color) !important;
+}
+
+.css-wx7wi4 {
+  color: var(--white-color) !important;
+}
+
+.css-1t8x7v1>.ps-menu-button {
+  padding-left: 1.5rem !important;
+}
+
+.css-wx7wi4 {
+  margin-right: 0px !important;
+}
+
+.css-1wvake5 {
+  border-right: 0px !important;
+}
