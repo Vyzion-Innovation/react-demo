@@ -48,7 +48,7 @@ const FormInput = ({
     };
 
     return (
-        <div className="field col-6 mt-2">
+        <div className="field col-12 col-sm-12 col-md-6 mt-2">
             {label && <label htmlFor={id} className="text__capital">{label}</label>}
             {renderInput()}
             {error && <small id={id} className="p-error">{error}</small>}

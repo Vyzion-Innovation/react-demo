@@ -203,7 +203,7 @@ function BusinessPage() {
                         headingName={HeadingName.business.personalInfo}
                         classname="mb-3 mt-3"
                     />
-                    <div className="p-fluid row modules__row">
+                    <div className="p-fluid">
                         <div className="row modules__row">
 
                             <FormInput type="text"

@@ -16,6 +16,7 @@ body {
 
 .modules__row {
   row-gap: 0.8rem;
+  padding-right: 0px;
 }
 
 .modules__card {
