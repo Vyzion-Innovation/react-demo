@@ -72,7 +72,7 @@ export function getItemCountFromLocalStorage(key) {
     }
   }
 
-  export const signOutUser = (navigate) => {
+  export const signOutUser = (navigate,toast) => {
     try {
       const session = localStorage.getItem("session");
       if (session) {

@@ -23,7 +23,9 @@ body {
   padding: 2rem;
 }
 
-.modules__save_button, .modules__savenext_button, .modules__back_button {
+.modules__save_button,
+.modules__savenext_button,
+.modules__back_button {
   margin: 0;
   display: inline-flex;
   cursor: pointer;
@@ -39,7 +41,8 @@ body {
   height: 2.5rem;
 }
 
-.modules__save_button, .modules__savenext_button {
+.modules__save_button,
+.modules__savenext_button {
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
 }
@@ -54,7 +57,8 @@ body {
   align-items: end;
 }
 
-.lists__edit_button, .lists__delete_button {
+.lists__edit_button,
+.lists__delete_button {
   background-color: var(--white-color) !important;
   margin: 0;
   display: inline-flex;
@@ -129,10 +133,10 @@ label {
 
 .business__main_heading {
   text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form_bottom_buttons {
