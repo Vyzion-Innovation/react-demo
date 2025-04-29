@@ -196,7 +196,7 @@ function BusinessPage() {
                 <div className="card modules__card">
                     <HeadingComponent
                         headingName={businessHeading}
-                        classname="mb-3 mt-3"
+                        classname="business__main_heading"
                     />
 
                     <HeadingComponent
@@ -237,7 +237,7 @@ function BusinessPage() {
                         <div className="row modules__row">
                             <HeadingComponent
                                 headingName={HeadingName.business.addressInfo}
-                                classname="mb-3 mt-3"
+                                classname="mb-1 mt-5"
                             />
 
 

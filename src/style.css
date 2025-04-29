@@ -125,3 +125,16 @@ label {
 .p-column-title {
   text-transform: capitalize;
 }
+
+.business__main_heading {
+  text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form_bottom_buttons {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}

@@ -4,8 +4,10 @@ import { Button, useLocation, useNavigate } from "../../libraries";
 function BottomButtons(props) {
   const location = useLocation(); 
   const navigate = useNavigate();
+
   return (
-    <div className="flex mt-3">
+
+    <div className="flex form_bottom_buttons">
       <Button
         label={props.label}
         type="button"

@@ -3,9 +3,9 @@ const ToastMessages = {
   loginError: "These credentials do not match with our records.",
 
   // toast messages for business module
-  businessAdd: "Business has been successfully added.",
-  businessUpdate: "Business has been successfully updated.",
-  businessDelete: "Business has been successfully deleted.",
+  businessAdd: "Business data has been successfully added.",
+  businessUpdate: "Business data has been successfully updated.",
+  businessDelete: "Business data has been successfully deleted.",
 };
 
 export default ToastMessages;
