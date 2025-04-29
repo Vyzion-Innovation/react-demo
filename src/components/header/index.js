@@ -1,6 +1,5 @@
 import React from "react";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import RoutingPaths from "../../helper/routingPaths";
 import { Avatar, Swal, toast, ToastContainer, useNavigate } from "../../libraries";
 import { signOutUser } from "../api";
 import "./index.css";
@@ -22,7 +21,7 @@ function Header({ navbarCallBack }) {
             cancelButtonText: "No",
         }).then((result) => {
             if (result.value) {
-                signOutUser(navigate, toast);            
+                signOutUser(navigate, toast);         
              }
         });
     };

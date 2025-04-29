@@ -1,4 +1,7 @@
+import React from "react";
 import RoutingPaths from "../../helper/routingPaths";
+import { toast, ToastContainer } from "../../libraries";
+import ToastMessages from "../../helper/toastMessages";
 
 // MARK: business API's
 export const createBusiness = async (payload) => {
@@ -69,12 +72,12 @@ export function getItemCountFromLocalStorage(key) {
     }
   }
 
-  export const signOutUser = (navigate, toast) => {
+  export const signOutUser = (navigate) => {
     try {
       const session = localStorage.getItem("session");
       if (session) {
         localStorage.clear();
-        navigate(RoutingPaths.login, { replace: true });
+        navigate(RoutingPaths.login);
       }
     } catch (error) {
       if (toast) toast.error(error.message || "Error signing out.");

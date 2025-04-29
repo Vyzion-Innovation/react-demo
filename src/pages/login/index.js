@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { Button, toast, ToastContainer, useNavigate } from "../../libraries";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import { ErrorMessages, HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths } from "../../components";
+import { ErrorMessages, HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths, ToastMessages } from "../../components";
 import "./index.css";
-
-
 
 const LoginPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -48,7 +46,11 @@ const LoginPage = () => {
   const loginApi = async () => {
     setLoading(true);
     localStorage.setItem("session", JSON.stringify(loginData));
-    navigate(RoutingPaths.home);
+    toast.success(ToastMessages.loginSuccess);
+    <ToastContainer/>
+    setTimeout(() => {
+      navigate(RoutingPaths.home);
+    }, 1000);
   };
 
   const tapOnSignIn = () => {
