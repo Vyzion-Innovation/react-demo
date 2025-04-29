@@ -1,12 +1,12 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { InputHeading, ListButtons, HeadingName, RoutingPaths, ToastMessages, HeadingComponent, AddButton } from "../../../components";
-import { Column, DataTable, Swal, toast, ToastContainer, useNavigate } from "../../../libraries";
+import { InputHeading, ListButtons, HeadingName, RoutingPaths, HeadingComponent, AddButton } from "../../../components";
+import { Column, DataTable, Swal, ToastContainer, useNavigate } from "../../../libraries";
+import { deleteBusinessById, getBusinessData } from "../../../components/api";
 
 function BusinessList() {
   const [businessData, setBusinessData] = useState([]);
-  const [countryData, setCountryData] = useState([])
-  const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
 
   // MARK: Use Effect Method
@@ -14,36 +14,17 @@ function BusinessList() {
     fetchBusinessApi();
   }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
-  // MARK: use layout effect function
+  // use layout effect function
   useLayoutEffect(() => {
     document.title = HeadingName.business.list;
   }, []);
 
-
-  // MARK: fetch business API
-  async function fetchBusinessApi() {
-    const token = localStorage.getItem("token");
-    setLoading(true);
-
-    try {
-      // const data = await fetchBusinessDetails(token);
-      setLoading(false)
-      // setBusinessData(data);
-    } catch (error) {
-      toast.error(error);
-      <ToastContainer />
-
-      setLoading(false);
-    }
-  }
-
-
-  // MARK: Edit data function
+  // MARK: data function
   const tapOnEdit = (businessData) => () => {
     navigate(RoutingPaths.editBusiness, { state: businessData });
   };
 
-  // MARK: Delete data function
+  //  Delete data function
   const tapOnDelete = (businessData) => () => {
     Swal.fire({
       title: "Are you sure?",
@@ -61,25 +42,25 @@ function BusinessList() {
     });
   };
 
-  // MARK: delete API
+  // MARK: API's
+  // business API
+  async function fetchBusinessApi() {
+    const data = getBusinessData();
+    setBusinessData(data);
+    setLoading(false);
+  }
+
+  //delete API
   const deleteBusinessApi = async (business) => {
-    const token = localStorage.getItem("token");
-
-    try {
-      // await deleteBusinessDetails(business.id, token);
-      setBusinessData(prevState => prevState.filter(item => item.id !== business.id));
-      toast.success(ToastMessages.businessDelete);
-      <ToastContainer />
-
-    } catch (error) {
-      toast.error(error);
-      <ToastContainer />
-    }
-
+    const updatedData = deleteBusinessById(business.id);
+    setBusinessData(updatedData);
   };
 
+  if (isLoading) {
+    return <div className="loading-div"> Loading ... </div>;
+  }
 
-  // MARK: business columns data
+  // MARK: UI start
   const businessColumnsData = [
     {
       field: "business_name",
@@ -90,6 +71,11 @@ function BusinessList() {
     { field: "phone", header: InputHeading.business.phone },
     { field: "state", header: InputHeading.business.state, className: "table__column__capital", },
     {
+      field: "gstin",
+      header: InputHeading.business.gst_no,
+      className: "table__column_upper",
+    },
+    {
       field: "city",
       header: InputHeading.business.city,
       className: "table__column__capital",
@@ -97,11 +83,22 @@ function BusinessList() {
     {
       field: "postal_code",
       header: InputHeading.business.code,
+      className: "table__column_upper",
+    },
+    {
+      field: "street_address",
+      header: InputHeading.business.address,
+      className: "table__column__capital",
+    },
+    {
+      field: "tax",
+      header: InputHeading.business.tax,
+      className: "table__column_upper",
     },
     {
       field: "actions",
       header: InputHeading.business.action,
-      CardBody: (data) => (
+      body: (data) => (
         <>
           <ListButtons
             editclick={tapOnEdit(data)}
@@ -112,10 +109,6 @@ function BusinessList() {
       ),
     },
   ];
-
-  if (isLoading) {
-    return <div className="loading-div"> Loading ... </div>;
-  }
 
   return (
     <div className="modules__main__div">
@@ -131,7 +124,6 @@ function BusinessList() {
           <DataTable
             className="mt-5 mb-3"
             value={businessData}
-            header={undefined}
             emptyMessage="No data found."
           >
             {businessColumnsData.map((col) => (
@@ -140,7 +132,7 @@ function BusinessList() {
                 field={col.field}
                 header={col.header}
                 bodyClassName={col.className}
-                body={col.CardBody}
+                body={col.body}
               />
             ))}
           </DataTable>

@@ -1,9 +1,8 @@
-import { Button } from "primereact/button";
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Button, useLocation, useNavigate } from "../../libraries";
 
 function BottomButtons(props) {
-  const location = useLocation(); //  used to access the current location object which gives info about URL like strings, path etc
+  const location = useLocation(); 
   const navigate = useNavigate();
   return (
     <div className="flex mt-3">

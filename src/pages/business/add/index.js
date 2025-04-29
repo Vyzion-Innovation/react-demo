@@ -1,7 +1,8 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { BottomButtons, ButtonLabels, ErrorMessages, FormInput, HeadingComponent, HeadingName, InputHeading, Placeholder, RoutingPaths } from "../../../components";
+import { BottomButtons, ButtonLabels, ErrorMessages, FormInput, HeadingComponent, HeadingName, InputHeading, Placeholder, RoutingPaths, ToastMessages } from "../../../components";
 import { toast, ToastContainer, useState } from "../../../libraries";
 import { useLocation, useNavigate } from "react-router-dom";
+import { createBusiness, updateBusiness } from "../../../components/api";
 
 
 function BusinessPage() {
@@ -18,7 +19,6 @@ function BusinessPage() {
         business_name: "",
         email: "",
         phone: "",
-        country_id: "",
         state: "",
         city: "",
         postal_code: "",
@@ -31,11 +31,11 @@ function BusinessPage() {
         business_name: "",
         email: "",
         phone: "",
-        country_id: "",
         state: "",
         city: "",
         postal_code: "",
         street_address: "",
+        gstin: "",
         tax: "",
     });
 
@@ -46,7 +46,7 @@ function BusinessPage() {
         }
     }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
-    // MARK: Use Layout Method
+    //  Use Layout Method
     useLayoutEffect(() => {
         document.title = location.state
             ? HeadingName.business.edit
@@ -71,9 +71,6 @@ function BusinessPage() {
         } else if (!/^\d*$/.test(data.phone)) {
             errors.phone = ErrorMessages.phoneNumber;
         }
-        if (!data.country_id) {
-            errors.country_id = ErrorMessages.country;
-        }
         if (!data.state) {
             errors.state = ErrorMessages.state;
         }
@@ -85,6 +82,9 @@ function BusinessPage() {
         }
         if (!data.street_address) {
             errors.street_address = ErrorMessages.address;
+        }
+        if (!data.gstin) {
+            errors.gstin = ErrorMessages.gstNumber;
         }
         if (!data.tax) {
             errors.tax = ErrorMessages.tax;
@@ -103,36 +103,28 @@ function BusinessPage() {
     };
 
 
-    // this function is working when we submit the form by clicking on save button
+    // MARK: tap on buttons
     const tapOnSave = () => {
         const newErrors = validateErrors(businessData);
         setErrors(newErrors);
         setIsSubmitted(true);
         if (Object.keys(newErrors).length === 0) {
             setLoading1(true);
-            if (location.state) {
-                updateApi();
-            } else {
-                createApi();
-            }
+            location.state ? updateApi() : createApi();
         }
     };
 
-    // this function is working when we submit the form by clicking on save andnext button
     const tapOnSaveNext = () => {
         const newErrors = validateErrors(businessData);
         setErrors(newErrors);
         setIsSubmitted(true);
         if (Object.keys(newErrors).length === 0) {
             setLoading2(true);
-            createApi();
+            createApi(true);
         }
     };
 
     async function setEditBusinessFunction() {
-
-
-
         setBusinessData((prevState) => ({
             ...prevState,
             business_name: location.state.business_name,
@@ -151,42 +143,38 @@ function BusinessPage() {
         setBusinessID(location.state.id);
     }
 
-    function payload() {
-        const object = {
-            ...businessData,
-        };
-
-        object.business_name = businessData.business_name.toLowerCase();
-        object.email = businessData.email;
-        object.phone = businessData.phone;
-        object.state = businessData.state.toLowerCase();
-        object.city = businessData.city.toLowerCase();
-        object.postal_code = businessData.postal_code.toLowerCase();
-        object.street_address = businessData.street_address.toLowerCase();
-        object.gstin = businessData.gstin.toLowerCase();
-        object.tax = businessData.tax.toLowerCase();
-
-        return object;
-    }
-
-    // MARK: API call
-
-    async function createApi() {
-        const session = localStorage.getItem("session");
-        const writePayload = payload();
-        if (session) {
-            localStorage.setItem("businessData", JSON.stringify(writePayload));
-        }
+    // MARK: APIs
+    async function createApi(saveNext) {
+        const formattedPayload = getFormattedPayload();
+        await createBusiness(formattedPayload);
+        toast.success(ToastMessages.businessAdd);
+        setLoading1(false);
+        setLoading2(false);
+        setTimeout(() => {
+            saveNext ? navigate(RoutingPaths.addBusiness) : navigate(RoutingPaths.businessList);
+        }, 1200);
     }
 
     async function updateApi() {
-        const session = localStorage.getItem("session");
-        const updatePayload = payload();
-        if (session) {
-            localStorage.setItem("businessData", JSON.stringify(updatePayload));
-        }
+        const formattedPayload = getFormattedPayload();
+        await updateBusiness(businessID, formattedPayload);
+        toast.success(ToastMessages.businessUpdate);
+
+        setTimeout(() => {
+            setLoading1(false);
+            navigate(RoutingPaths.businessList);
+        }, 1200);
     }
 
+    function getFormattedPayload() {
+        const lowerCased = Object.fromEntries(
+            Object.entries(businessData).map(([key, value]) => [key, value.toLowerCase()])
+        );
+        return lowerCased;
+    }
+
+
+    // MARK: UI start
     return (
         <div className="modules__main__div">
             <div className="col-12">

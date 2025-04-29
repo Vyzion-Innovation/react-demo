@@ -1,8 +1,8 @@
 import React from "react";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
 import RoutingPaths from "../../helper/routingPaths";
-import "./index.css";
 import { Avatar, Swal, toast, ToastContainer, useNavigate } from "../../libraries";
+import "./index.css";
 
 
 function Header({ navbarCallBack }) {

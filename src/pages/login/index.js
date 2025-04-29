@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, toast, ToastContainer, useNavigate } from "../../libraries";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import { ErrorMessages, HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths } from "../../components";
+import { ErrorMessages, HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths, FormInput } from "../../components";
 import "./index.css";
 
 
@@ -74,7 +74,7 @@ const LoginPage = () => {
             <h5 className="mb-4 text-center">{HeadingName.login.main}</h5>
             <div className="p-fluid">
 
-              <FormAuthInput
+              <FormInput
                 id="email"
                 name="email"
                 value={loginData.email}

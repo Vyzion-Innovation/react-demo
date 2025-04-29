@@ -140,3 +140,7 @@ label {
 .text__capital {
   text-transform: capitalize;
 }
+
+.table__column_upper {
+  text-transform: uppercase;
+}

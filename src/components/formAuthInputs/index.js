@@ -2,7 +2,6 @@ import React from "react";
 import { AsyncSelect, InputText, InputTextarea, Password } from "../../libraries";
 
 
-
 const FormAuthInput = ({
     type = "text",
     id,
@@ -30,34 +29,6 @@ const FormAuthInput = ({
                         placeholder={placeholder}
                         toggleMask
                         feedback={false}
-                        {...rest}
-                    />
-                );
-            case "textarea":
-                return (
-                    <InputTextarea
-                        id={id}
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        placeholder={placeholder}
-                        rows={3}
-                        {...rest}
-                    />
-                );
-            case "select":
-                return (
-                    <AsyncSelect
-                        id={id}
-                        name={name}
-                        value={value}
-                        onChange={onChange}
-                        placeholder={placeholder}
-                        loadOptions={optionsLoader}
-                        isClearable={isClearable}
-                        defaultOptions
-                        getOptionLabel={(e) => e.name}
-                        getOptionValue={(e) => e.id}
                         {...rest}
                     />
                 );
