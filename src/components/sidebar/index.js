@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import RoutingPaths from "../../helper/routingPaths";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import { Button, Link, Menu, MenuItem, Sidebar, Splitter, Swal, toast, ToastContainer, useNavigate } from "../../libraries";
+import { Button, Link, Menu, MenuItem, Sidebar, Splitter, Swal, toast, useNavigate } from "../../libraries";
+import { signOutUser } from "../api";
 import "./index.css";
 
 
@@ -68,23 +69,9 @@ const SidebarComponent = ({ props, callBack }) => {
       cancelButtonText: "No",
     }).then((result) => {
       if (result.value) {
-        signOutApi();
+        signOutUser(navigate, toast); 
       }
     });
-  };
-
-  const signOutApi = async () => {
-    const token = localStorage.getItem("token");
-
-    try {
-      // await getSignOutApi(token);
-
-      localStorage.clear();
-      navigate(RoutingPaths.login);  
-    } catch (error) {
-      toast.error( error);
-      <ToastContainer/>
-    }
   };
 
   return (

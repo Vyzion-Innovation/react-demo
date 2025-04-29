@@ -104,26 +104,6 @@ body {
   text-transform: capitalize;
 }
 
-/* for calendar button */
-.p-button {
-  background: var(--primary-color);
-  border: 1px solid var(--primary-color);
-}
-
-.p-datepicker-trigger {
-  border-top-left-radius: unset !important;
-  border-bottom-left-radius: unset !important;
-  border-radius: 6px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-}
-
-.p-datatable .p-column-header-content {
-text-transform: capitalize;
-}
-
 label {
   text-transform: capitalize;
 }
@@ -133,9 +113,6 @@ label {
   font-size: 4rem;
 }
 
-.css-13cymwt-control {
-  padding: 0.4rem 0.4rem;
-}
 
 .text__capital {
   text-transform: capitalize;

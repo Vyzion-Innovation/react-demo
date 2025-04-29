@@ -1,9 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { RoutingPaths } from '../../components';
+import { getItemCountFromLocalStorage } from '../../components/api';
+import { useNavigate } from '../../libraries';
+import "./index.css"
 
-function Home(){
+
+
+function Home() {
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const count = getItemCountFromLocalStorage('businessData');
+    setCount(count);
+  }, []);
+
+  // MARK: business list path
+  function businessListPath() {
+    navigate(RoutingPaths.businessList);
+    window.scrollTo(0, 0);
+  }
+
+
   return (
-    <div>
-      <h1 style={{textAlign: "center"}}> In progress</h1>
+    <div className="modules__main__div">
+      <div className="col-12">
+        <div className="col dashboard-col">
+          <div className="card p-4 home__card ">
+            <p className="dashboard-para">Total Business:</p>
+            <p className="dashboard-content" onClick={businessListPath}>
+              {count}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

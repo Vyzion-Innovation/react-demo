@@ -2,6 +2,7 @@ import React from "react";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
 import RoutingPaths from "../../helper/routingPaths";
 import { Avatar, Swal, toast, ToastContainer, useNavigate } from "../../libraries";
+import { signOutUser } from "../api";
 import "./index.css";
 
 
@@ -21,33 +22,9 @@ function Header({ navbarCallBack }) {
             cancelButtonText: "No",
         }).then((result) => {
             if (result.value) {
-                signOutApi();
-            }
+                signOutUser(navigate, toast);            
+             }
         });
-    };
-
-
-    const signOutApi = async () => {
-
-        const token = localStorage.getItem("token");
-
-        try {
-            //   await getSignOutApi(token);
-            if (token) {
-                localStorage.clear();
-                navigate(RoutingPaths.login, { replace: true });
-
-                // dont allow user to go back after logout in Reactjs
-                window.history.pushState(null, null, window.location.href);
-                window.onpopstate = function () {
-                    window.history.go(0);
-                };
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error(error);
-            <ToastContainer />
-        }
     };
 
     const toggleSidebar = () => {

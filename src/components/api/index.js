@@ -1,6 +1,8 @@
+import RoutingPaths from "../../helper/routingPaths";
+
 // MARK: business API's
 export const createBusiness = async (payload) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("session");
     if (!token) return;
 
     const existing = JSON.parse(localStorage.getItem("businessData")) || [];
@@ -50,3 +52,34 @@ export const deleteBusinessById = (id) => {
         return [];
     }
 };
+
+// MARK: count business
+export function getItemCountFromLocalStorage(key) {
+    const dataFromStorage = localStorage.getItem(key);
+    if (!dataFromStorage) return 0;
+  
+    try {
+      const parsedArray = JSON.parse(dataFromStorage);
+      if (Array.isArray(parsedArray)) {
+        return parsedArray.length;
+      } else {
+        console.error('Data is not an array');
+        return 0;
+      }
+    } catch (error) {
+      console.error('Error parsing JSON from localStorage:', error);
+      return 0;
+    }
+  }
+
+  export const signOutUser = (navigate, toast) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        localStorage.clear();
+        navigate(RoutingPaths.login, { replace: true });
+      }
+    } catch (error) {
+      if (toast) toast.error(error.message || "Error signing out.");
+    }
+  };
