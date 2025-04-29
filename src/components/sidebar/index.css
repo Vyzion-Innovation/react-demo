@@ -118,15 +118,6 @@ a {
   color: var(--white-color) !important;
 }
 
-/* dropdown arrow  */
-.css-honxw6 {
-  transform: rotate(45deg) !important;
-  -webkit-transform: rotate(45deg) !important;
-  -moz-transform: rotate(45deg) !important;
-  -ms-transform: rotate(45deg) !important;
-  -o-transform: rotate(45deg) !important;
-}
-
 .css-12w9als {
   color: var(--white-color) !important;
 }
@@ -145,4 +136,36 @@ a {
 
 .css-1wvake5 {
   border-right: 0px !important;
+}
+
+.css-dip3t8 {
+  background-color: var(--black-color) !important;
+}
+
+.css-1t8x7v1>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-1tqrhto>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-16jesut>.ps-menu-button:hover {
+  background-color: var(--black-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.css-1cuxlhl {
+  color: var(--white-color) !important;
+}
+
+.css-18unl23 {
+  background-color: var(--black-color) !important;
+  color: var(--white-color) !important;
+}
+
+.sidebar_highlight{
+  background-color: var(--primary-color) !important;
 }

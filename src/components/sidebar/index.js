@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import RoutingPaths from "../../helper/routingPaths";
-import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import { Button, Link, Menu, MenuItem, Sidebar, Splitter, Swal, toast, useNavigate } from "../../libraries";
+import CompanyLogo from "../../assets/vyionLogo/dark_logo.png";
+import { Button, Link, Menu, MenuItem, Sidebar, Splitter, Swal, toast, useLocation, useNavigate } from "../../libraries";
 import { signOutUser } from "../api";
 import "./index.css";
 
 
 const SidebarComponent = ({ props, callBack }) => {
   const [isOpen, setIsOpen] = useState(true);
+    const location = useLocation();
+  const currentPath = location.pathname;
   const navigate = useNavigate();
 
   const SidebarList = [
@@ -46,7 +48,6 @@ const SidebarComponent = ({ props, callBack }) => {
     };
   }, [props]);
 
-  //  we can pass string/ any value from B To A that would be defined inside the function for example, callBack({key: "abc"})
   const tapOnCrossButton = () => {
     callBack();
   };
@@ -76,44 +77,20 @@ const SidebarComponent = ({ props, callBack }) => {
 
   return (
     <>
-      <div
-        className={isOpen ? "sidebar__background__blur" : ""}
-        onClick={tapOnSidebarLink}
-      >
-        <div
-          className={
-            isOpen
-              ? "card flex  position-fixed sidebar__open"
-              : "sidebar__close"
-          }
-          id="sidebar__style"
-        >
+      <div className={isOpen ? "sidebar__background__blur" : ""} onClick={tapOnSidebarLink}>
+        <div className={isOpen ? "card flex  position-fixed sidebar__open" : "sidebar__close"} id="sidebar__style">
           <div style={{ justifySelf: "center" }}>
             <span className="inline-flex">
-              <img
-                src={CompanyLogo}
-                alt="logo"
-                className="sidebar__company-logo"
-              />
+              <img src={CompanyLogo} alt="logo" className="sidebar__company-logo"/>
             </span>
             <span>
-              <Button
-                type="button"
-                onClick={tapOnCrossButton}
-                icon="pi pi-times"
-                className="sidebar__cross_button"
-              ></Button>
+              <Button type="button" onClick={tapOnCrossButton} icon="pi pi-times" className="sidebar__cross_button"></Button>
             </span>
           </div>
           <Splitter />
 
           <div className="pt-2">
-            <h5
-              className="text-white ms-2 mb-3 mt-3"
-              style={{ paddingLeft: "1.5rem" }}
-            >
-              Menu
-            </h5>
+            <h5 className="text-white ms-2 mb-3 mt-3" style={{ paddingLeft: "1.5rem" }}>Menu</h5>
 
             <Sidebar>
               <Menu>
@@ -122,7 +99,11 @@ const SidebarComponent = ({ props, callBack }) => {
                     <MenuItem
                       component={<Link to={sidebarobject.path} />}
                       key={sidebarobject.id}
-                    >
+                      className={
+                        currentPath === sidebarobject.path
+                          ? "sidebar_highlight"
+                          : ""
+                      }>
                       <i className={sidebarobject.icon}></i>
                       {sidebarobject.title}
                     </MenuItem>
@@ -133,7 +114,7 @@ const SidebarComponent = ({ props, callBack }) => {
             <div style={{marginTop: "10.9rem"}}>
             <hr className="sidebar__separator"></hr>
             <button
-              className="dropdown-item ps-4"
+              className="dropdown-item ps-4 "
               type="button"
               onClick={tapOnSignOutConfirm}
               style={{

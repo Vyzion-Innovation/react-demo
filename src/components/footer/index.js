@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.css";
+import RoutingPaths from "../../helper/routingPaths";
 
 function Footer() {
   return (
@@ -7,7 +8,7 @@ function Footer() {
       <div className="footer__div ps-3 pe-3">
         <div>
           <a
-            href="/node_modules"
+            href={RoutingPaths.home}
             rel="noopener noreferrer"
             className="text-black text-decoration-none"
           >

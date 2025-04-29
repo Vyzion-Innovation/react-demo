@@ -30,8 +30,7 @@ export const updateBusiness = async (id, payload) => {
 
 export const getBusinessData = () => {
     try {
-        const raw = localStorage.getItem("businessData");
-        const data = raw ? JSON.parse(raw) : [];
+        const data =  JSON.parse(localStorage.getItem("businessData")) || [];
         return Array.isArray(data) ? data : [];
     } catch (error) {
         console.error("Error parsing business data:", error);
@@ -41,9 +40,7 @@ export const getBusinessData = () => {
 
 export const deleteBusinessById = (id) => {
     try {
-        const raw = localStorage.getItem("businessData");
-        let data = raw ? JSON.parse(raw) : [];
-
+      let data  = JSON.parse(localStorage.getItem("businessData")) || [];
         const updatedData = data.filter((item) => item.id !== id);
         localStorage.setItem("businessData", JSON.stringify(updatedData));
         return updatedData;
@@ -74,8 +71,8 @@ export function getItemCountFromLocalStorage(key) {
 
   export const signOutUser = (navigate, toast) => {
     try {
-      const token = localStorage.getItem("token");
-      if (token) {
+      const session = localStorage.getItem("session");
+      if (session) {
         localStorage.clear();
         navigate(RoutingPaths.login, { replace: true });
       }

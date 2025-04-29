@@ -1,7 +1,3 @@
-.dashboard-col {
-    width: 15rem;
-}
-  
 .dashboard-content {
     align-self: center;
     font-size: 1.5rem;
@@ -16,13 +12,9 @@
     font-weight: 600;
 }
   
-@media screen and (max-width: 768px) {
-    .dashboard-col {
-      width: 100%;
-    }
-}
-  
 .home__card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    height: 10rem;
+    justify-content: center;
 }
   

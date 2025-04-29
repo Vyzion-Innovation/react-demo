@@ -24,15 +24,13 @@ function Home() {
 
   return (
     <div className="modules__main__div">
-      <div className="col-12">
-        <div className="col dashboard-col">
-          <div className="card p-4 home__card ">
+        <div className="col-4">
+          <div className="card p-4 home__card">
             <p className="dashboard-para">Total Business:</p>
             <p className="dashboard-content" onClick={businessListPath}>
               {count}
             </p>
           </div>
-        </div>
       </div>
     </div>
   )

@@ -121,8 +121,23 @@ function BusinessPage() {
         if (Object.keys(newErrors).length === 0) {
             setLoading2(true);
             createApi(true);
+            resetFormData();
         }
     };
+
+    const resetFormData = () => {
+        setBusinessData({
+            business_name: "",
+            email: "",
+            phone: "",
+            state: "",
+            city: "",
+            postal_code: "",
+            street_address: "",
+            gstin: "",
+            tax: "",
+        });
+    }
 
     async function setEditBusinessFunction() {
         setBusinessData((prevState) => ({

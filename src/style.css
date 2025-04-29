@@ -121,3 +121,7 @@ label {
 .table__column_upper {
   text-transform: uppercase;
 }
+
+.p-column-title {
+  text-transform: capitalize;
+}

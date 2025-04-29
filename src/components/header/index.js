@@ -73,21 +73,14 @@ function Header({ navbarCallBack }) {
                                         alt="logo"
                                         style={{
                                             height: "5rem",
-                                            width: "10rem",
+                                            width: "9rem",
                                             textAlign: "center",
                                         }}
                                     />
                                 </li>
-
                                 <div className="dropdown-divider m-0"></div>
-
-
                             </ul>
 
-                            <a className="dropdown-item" href={RoutingPaths.profile}>
-                                <i className="pi pi-user pe-2"></i>profile
-                            </a>
-                            <div className="dropdown-divider m-0"></div>
                             <button
                                 className="dropdown-item"
                                 type="button"

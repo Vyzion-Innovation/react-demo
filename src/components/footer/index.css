@@ -13,6 +13,7 @@
 .anchor__hover {
     color: black;
     text-decoration: underline;
+    font-weight: 600;
 }
 
 .anchor__hover:hover {
