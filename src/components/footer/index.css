@@ -1,0 +1,21 @@
+.footer__div {
+    display: flex;
+    padding: 1rem;
+    background-color: var(--white-background-color);
+    color: var(--text-color);
+    bottom: 0px !important;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 3.5rem;
+    box-shadow: 0 0.125rem 0.25rem;
+}
+
+.anchor__hover {
+    color: black;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.anchor__hover:hover {
+    color: var(--primary-color);
+}

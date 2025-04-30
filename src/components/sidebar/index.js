@@ -1,0 +1,137 @@
+import React, { useEffect, useState } from "react";
+import RoutingPaths from "../../helper/routingPaths";
+import CompanyLogo from "../../assets/vyionLogo/dark_logo.png";
+import { Button, Link, Menu, MenuItem, Sidebar, Splitter, Swal, toast, useLocation, useNavigate } from "../../libraries";
+import { signOutUser } from "../api";
+import "./index.css";
+
+
+const SidebarComponent = ({ props, callBack }) => {
+  const [isOpen, setIsOpen] = useState(true);
+    const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
+
+  const SidebarList = [
+    {
+      id: 1,
+      title: "Home",
+      path: RoutingPaths.home,
+      icon: "pi pi-home me-2",
+      subSections: [],
+      isShowSection: false,
+    },
+    {
+        id: 2,
+        title: "Business",
+        path: RoutingPaths.businessList,
+        icon: "pi pi-building me-2",
+        subSections: [],
+        isShowSection: false,
+    },
+  ];
+
+  const [width, setWidth] = useState(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+
+  const isMobile = width <= 768;
+
+  // MARK: Use Effect Method
+  useEffect(() => {
+    setIsOpen(props);
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, [props]);
+
+  const tapOnCrossButton = () => {
+    callBack();
+  };
+
+  const tapOnSidebarLink = () => {
+    if (isMobile) {
+      callBack();
+    }
+  };
+
+  const tapOnSignOutConfirm = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to sign out.`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "var(--red-color)",
+      cancelButtonColor: "var(--secondary-color)",
+      confirmButtonText: "Yes!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.value) {
+        signOutUser(navigate, toast); 
+      }
+    });
+  };
+
+  return (
+    <>
+      <div className={isOpen ? "sidebar__background__blur" : ""} onClick={tapOnSidebarLink}>
+        <div className={isOpen ? "card flex  position-fixed sidebar__open" : "sidebar__close"} id="sidebar__style">
+          <div style={{ justifySelf: "center" }}>
+            <span className="inline-flex">
+              <img src={CompanyLogo} alt="logo" className="sidebar__company-logo"/>
+            </span>
+            <span>
+              <Button type="button" onClick={tapOnCrossButton} icon="pi pi-times" className="sidebar__cross_button"></Button>
+            </span>
+          </div>
+          <Splitter />
+
+          <div className="pt-2">
+            <h5 className="text-white ms-2 mb-3 mt-3" style={{ paddingLeft: "1.5rem" }}>Menu</h5>
+
+            <Sidebar>
+              <Menu>
+                {SidebarList.map((sidebarobject) => (
+                  <>
+                    <MenuItem
+                      component={<Link to={sidebarobject.path} />}
+                      key={sidebarobject.id}
+                      className={
+                        currentPath === sidebarobject.path
+                          ? "sidebar_highlight"
+                          : ""
+                      }>
+                      <i className={sidebarobject.icon}></i>
+                      {sidebarobject.title}
+                    </MenuItem>
+                  </>
+                ))}
+              </Menu>
+            </Sidebar>
+            <div style={{marginTop: "10.9rem"}}>
+            <hr className="sidebar__separator"></hr>
+            <button
+              className="dropdown-item ps-4 "
+              type="button"
+              onClick={tapOnSignOutConfirm}
+              style={{
+                textTransform: "capitalize",
+                paddingTop: ".6rem",
+                paddingBottom: "0.6rem",
+                marginTop: "22.5rem"
+              }}
+            >
+              <i className="pi pi-sign-out pe-2"></i>sign out
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SidebarComponent;
