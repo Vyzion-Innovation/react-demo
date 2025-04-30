@@ -1,0 +1,49 @@
+.p-input-icon {
+    writing-mode: tb;
+    -webkit-writing-mode: tb;
+    -ms-writing-mode: tb;
+}
+
+.login__main-div {
+    text-align: -webkit-center !important;
+}
+
+.login__sub-div {
+    max-width: 550px;
+    margin: 10rem 8rem;
+}
+
+.login__card {
+    padding: 2rem;
+    text-align: left;
+}
+
+.login__button {
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.login__company__logo {
+    height: 10rem;
+    width: 15rem;
+    align-self: center;
+}
+
+.label__capital-form {
+    text-transform: capitalize;
+
+}
+
+.anchor__tag {
+    text-transform: capitalize;
+    color: var(--primary-color) !important
+}
+
+.anchor__tag_para {
+    display: flex;
+    justify-content: center;
+}

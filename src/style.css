@@ -1,0 +1,150 @@
+@import './variables.css';
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.modules__main__div {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  text-align: start;
+  height: -webkit-fill-available !important;
+  max-height: -webkit-fill-available !important;
+}
+
+.modules__row {
+  row-gap: 0.8rem;
+  padding-right: 0px;
+}
+
+.modules__card {
+  padding: 2rem;
+}
+
+.modules__save_button,
+.modules__savenext_button,
+.modules__back_button {
+  margin: 0;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  vertical-align: bottom;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  height: 2.5rem;
+}
+
+.modules__save_button,
+.modules__savenext_button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.modules__back_button {
+  background-color: var(--secondary-color) !important;
+  border: 1px solid var(--secondary-color) !important;
+}
+
+.modules__lists_main-content {
+  display: flex;
+  align-items: end;
+}
+
+.lists__edit_button,
+.lists__delete_button {
+  background-color: var(--white-color) !important;
+  margin: 0;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  vertical-align: bottom;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  padding-left: .5rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  height: 2rem;
+  width: 2rem;
+  margin-left: 0.5rem;
+}
+
+.lists__edit_button {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.lists__delete_button {
+  color: var(--red-color);
+  border: 1px solid var(--red-color) !important;
+}
+
+.lists__add_button {
+  margin: 0;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  vertical-align: bottom;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 6px;
+  height: 2.5rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.table__column__capital {
+  text-transform: capitalize;
+}
+
+label {
+  text-transform: capitalize;
+}
+
+.loading-div {
+  text-align: center;
+  font-size: 4rem;
+}
+
+
+.text__capital {
+  text-transform: capitalize;
+}
+
+.table__column_upper {
+  text-transform: uppercase;
+}
+
+.p-column-title {
+  text-transform: capitalize;
+}
+
+.business__main_heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form_bottom_buttons {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+
+.input__valid:after {
+  content: " *";
+  color: var(--red-color);
+}
