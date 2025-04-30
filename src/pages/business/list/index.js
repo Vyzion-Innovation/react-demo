@@ -4,64 +4,26 @@ import { Column, DataTable, Swal, ToastContainer, useNavigate } from "../../../l
 import { deleteBusinessById, getBusinessData } from "../../../components/api";
 
 function BusinessList() {
+   // MARK: variables declaration
   const [businessData, setBusinessData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const navigate = useNavigate();
 
 
-  // MARK: Use Effect Method
+
+
+ // MARK: Controller lifeycle
   useEffect(() => {
     fetchBusinessApi();
   }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
-  // use layout effect function
   useLayoutEffect(() => {
     document.title = HeadingName.business.list;
   }, []);
 
-  // MARK: data function
-  const tapOnEdit = (businessData) => () => {
-    navigate(RoutingPaths.editBusiness, { state: businessData });
-  };
 
-  //  Delete data function
-  const tapOnDelete = (businessData) => () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: `You want to delete this business data`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "var(--red-color)",
-      cancelButtonColor: "var(--secondary-color)",
-      confirmButtonText: "Yes!",
-      cancelButtonText: "No",
-    }).then((result) => {
-      if (result.value) {
-        deleteBusinessApi(businessData);
-      }
-    });
-  };
-
-  // MARK: API's
-  // business API
-  async function fetchBusinessApi() {
-    const data = getBusinessData();
-    setBusinessData(data);
-    setLoading(false);
-  }
-
-  //delete API
-  const deleteBusinessApi = async (business) => {
-    const updatedData = deleteBusinessById(business.id);
-    setBusinessData(updatedData);
-  };
-
-  if (isLoading) {
-    return <div className="loading-div"> Loading ... </div>;
-  }
-
-  // MARK: UI start
-  const businessColumnsData = [
+   // MARK: Controller functions
+   const businessColumnsData = [
     {
       field: "business_name",
       header: InputHeading.business.name,
@@ -110,6 +72,50 @@ function BusinessList() {
     },
   ];
 
+ // MARK: Controller actions
+  const tapOnEdit = (businessData) => () => {
+    navigate(RoutingPaths.editBusiness, { state: businessData });
+  };
+
+
+  const tapOnDelete = (businessData) => () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `You want to delete this business data`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "var(--red-color)",
+      cancelButtonColor: "var(--secondary-color)",
+      confirmButtonText: "Yes!",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.value) {
+        deleteBusinessApi(businessData);
+      }
+    });
+  };
+
+
+  
+  // MARK: API's
+  async function fetchBusinessApi() {
+    const data = getBusinessData();
+    setBusinessData(data);
+    setLoading(false);
+  }
+
+  const deleteBusinessApi = async (business) => {
+    const updatedData = deleteBusinessById(business.id);
+    setBusinessData(updatedData);
+  };
+
+  if (isLoading) {
+    return <div className="loading-div"> Loading ... </div>;
+  }
+
+
+
+ // MARK: UI start
   return (
     <div className="modules__main__div">
       <div className="col-12">

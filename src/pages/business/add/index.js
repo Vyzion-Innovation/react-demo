@@ -1,11 +1,13 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { BottomButtons, ButtonLabels, ErrorMessages, FormInput, HeadingComponent, HeadingName, InputHeading, Placeholder, RoutingPaths, ToastMessages } from "../../../components";
+import { BottomButtons, ButtonLabels, FormInput, HeadingComponent, HeadingName, InputHeading, Placeholder, RoutingPaths, ToastMessages } from "../../../components";
 import { toast, ToastContainer, useState } from "../../../libraries";
 import { useLocation, useNavigate } from "react-router-dom";
 import { createBusiness, updateBusiness } from "../../../components/api";
+import { validateBusiness } from "../../../helper/validators";
 
 
 function BusinessPage() {
+    // MARK: variables declaration
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [buttonLabel, setButtonLabel] = useState(ButtonLabels.saveLabel);
     const [businessHeading, setBusinessHeading] = useState(HeadingName.business.add);
@@ -39,14 +41,13 @@ function BusinessPage() {
         tax: "",
     });
 
-    // MARK: Use Effect Method
+    // MARK: Controller lifeycle
     useEffect(() => {
         if (location.state) {
-            setEditBusinessFunction();
+            setEditBusiness();
         }
     }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
-    //  Use Layout Method
     useLayoutEffect(() => {
         document.title = location.state
             ? HeadingName.business.edit
@@ -54,45 +55,7 @@ function BusinessPage() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 
-    // MARK: Validation
-    const validateErrors = (data) => {
-        const errors = {};
-
-        if (!data.business_name) {
-            errors.business_name = ErrorMessages.businessName;
-        }
-        if (!data.email) {
-            errors.email = ErrorMessages.email;
-        } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-            errors.email = ErrorMessages.emailPattern;
-        }
-        if (!data.phone) {
-            errors.phone = ErrorMessages.phone;
-        } else if (!/^\d*$/.test(data.phone)) {
-            errors.phone = ErrorMessages.phoneNumber;
-        }
-        if (!data.state) {
-            errors.state = ErrorMessages.state;
-        }
-        if (!data.city) {
-            errors.city = ErrorMessages.city;
-        }
-        if (!data.postal_code) {
-            errors.postal_code = ErrorMessages.postalCode;
-        }
-        if (!data.street_address) {
-            errors.street_address = ErrorMessages.address;
-        }
-        if (!data.gstin) {
-            errors.gstin = ErrorMessages.gstNumber;
-        }
-        if (!data.tax) {
-            errors.tax = ErrorMessages.tax;
-        }
-
-        return errors;
-    };
-
+    // MARK: Controller functions
     const inputChange = (e) => {
         var { name, value } = e.target;
 
@@ -100,29 +63,6 @@ function BusinessPage() {
             ...businessData,
             [name]: value,
         });
-    };
-
-
-    // MARK: tap on buttons
-    const tapOnSave = () => {
-        const newErrors = validateErrors(businessData);
-        setErrors(newErrors);
-        setIsSubmitted(true);
-        if (Object.keys(newErrors).length === 0) {
-            setLoading1(true);
-            location.state ? updateApi() : createApi();
-        }
-    };
-
-    const tapOnSaveNext = () => {
-        const newErrors = validateErrors(businessData);
-        setErrors(newErrors);
-        setIsSubmitted(true);
-        if (Object.keys(newErrors).length === 0) {
-            setLoading2(true);
-            createApi(true);
-            resetFormData();
-        }
     };
 
     const resetFormData = () => {
@@ -139,7 +79,7 @@ function BusinessPage() {
         });
     }
 
-    async function setEditBusinessFunction() {
+    async function setEditBusiness() {
         setBusinessData((prevState) => ({
             ...prevState,
             business_name: location.state.business_name,
@@ -158,8 +98,38 @@ function BusinessPage() {
         setBusinessID(location.state.id);
     }
 
+    function getFormattedPayload() {
+        const lowerCased = Object.fromEntries(
+            Object.entries(businessData).map(([key, value]) => [key, value.toLowerCase()])
+        );
+        return lowerCased;
+    }
+
+    // MARK: Controller actions
+    const tapOnSave = () => {
+        const newErrors = validateBusiness(businessData);
+        setErrors(newErrors);
+        setIsSubmitted(true);
+        if (Object.keys(newErrors).length === 0) {
+            setLoading1(true);
+            location.state ? updateBusinessApi() : createBusinessApi();
+        }
+    };
+
+    const tapOnSaveNext = () => {
+        const newErrors = validateBusiness(businessData);
+        setErrors(newErrors);
+        setIsSubmitted(true);
+        if (Object.keys(newErrors).length === 0) {
+            setLoading2(true);
+            createBusinessApi(true);
+            resetFormData();
+        }
+    };
+
+
     // MARK: APIs
-    async function createApi(saveNext) {
+    async function createBusinessApi(saveNext) {
         const formattedPayload = getFormattedPayload();
         await createBusiness(formattedPayload);
         toast.success(ToastMessages.businessAdd);
@@ -170,7 +140,7 @@ function BusinessPage() {
         }, 1200);
     }
 
-    async function updateApi() {
+    async function updateBusinessApi() {
         const formattedPayload = getFormattedPayload();
         await updateBusiness(businessID, formattedPayload);
         toast.success(ToastMessages.businessUpdate);
@@ -181,12 +151,6 @@ function BusinessPage() {
         }, 1200);
     }
 
-    function getFormattedPayload() {
-        const lowerCased = Object.fromEntries(
-            Object.entries(businessData).map(([key, value]) => [key, value.toLowerCase()])
-        );
-        return lowerCased;
-    }
 
 
     // MARK: UI start

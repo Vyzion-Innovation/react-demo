@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Button, toast, ToastContainer, useNavigate } from "../../libraries";
+import { HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths, ToastMessages } from "../../components";
+import { validateLogin } from "../../helper/validators";
 import CompanyLogo from "../../assets/vyionLogo/vi.png";
-import { ErrorMessages, HeadingName, InputHeading, Placeholder, FormAuthInput, RoutingPaths, ToastMessages } from "../../components";
 import "./index.css";
 
+
 const LoginPage = () => {
+  // MARK: Variables declaration
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -19,6 +22,7 @@ const LoginPage = () => {
     password: "",
   });
 
+  // MARK: Controller functions
   const inputChange = (e) => {
     const { name, value } = e.target;
 
@@ -28,21 +32,18 @@ const LoginPage = () => {
     });
   };
 
-  const validateForm = (data) => {
-    const errors = {};
-
-    if (!data.email) {
-      errors.email = ErrorMessages.email;
-    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-      errors.email = ErrorMessages.emailPattern;
+  // MARK: Controller actions
+  const tapOnSignIn = () => {
+    const newErrors = validateLogin(loginData);
+    setErrors(newErrors);
+    setIsSubmitted(true);
+    if (Object.keys(newErrors).length === 0) {
+      setLoading(true);
+      loginApi();
     }
-    if (!data.password) {
-      errors.password = ErrorMessages.password;
-    }
-
-    return errors;
   };
 
+  // MARK: API's
   const loginApi = async () => {
     setLoading(true);
     localStorage.setItem("session", JSON.stringify(loginData));
@@ -53,15 +54,7 @@ const LoginPage = () => {
     }, 1000);
   };
 
-  const tapOnSignIn = () => {
-    const newErrors = validateForm(loginData);
-    setErrors(newErrors);
-    setIsSubmitted(true);
-    if (Object.keys(newErrors).length === 0) {
-      setLoading(true);
-      loginApi();
-    }
-  };
+  
 
   return (
     <div className="login__main-div">
