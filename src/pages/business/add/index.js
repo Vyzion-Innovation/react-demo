@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { BottomButtons, ButtonLabels, FormInput, HeadingComponent, HeadingName, InputHeading, Placeholder, RoutingPaths, ToastMessages } from "../../../components";
-import { toast, ToastContainer, useState } from "../../../libraries";
-import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer, useLocation, useNavigate, useState } from "../../../libraries";
 import { createBusiness, updateBusiness } from "../../../components/api";
 import { validateBusiness } from "../../../helper/validators";
 
@@ -44,7 +43,7 @@ function BusinessPage() {
     // MARK: Controller lifeycle
     useEffect(() => {
         if (location.state) {
-            setEditBusiness();
+            getPreviousBusinessData();
         }
     }, []);  // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -79,7 +78,7 @@ function BusinessPage() {
         });
     }
 
-    async function setEditBusiness() {
+    async function getPreviousBusinessData() {
         setBusinessData((prevState) => ({
             ...prevState,
             business_name: location.state.business_name,
@@ -170,7 +169,7 @@ function BusinessPage() {
                     <div className="p-fluid">
                         <div className="row modules__row">
 
-                            <FormInput type="text"
+                            <FormInput type="text" 
                                 id="business_name"
                                 name="business_name"
                                 value={businessData.business_name}

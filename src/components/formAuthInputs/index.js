@@ -1,5 +1,5 @@
 import React from "react";
-import { AsyncSelect, InputText, InputTextarea, Password } from "../../libraries";
+import { InputText, Password } from "../../libraries";
 
 
 const FormAuthInput = ({
@@ -48,7 +48,7 @@ const FormAuthInput = ({
 
     return (
         <div className="field col-12 mt-2">
-            {label && <label htmlFor={id} className="text__capital">{label}</label>}
+            {label && <label htmlFor={id} className="text__capital input__valid">{label}</label>}
             {renderInput()}
             {error && <small id={id} className="p-error">{error}</small>}
         </div>

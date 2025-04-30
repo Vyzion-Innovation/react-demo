@@ -48,13 +48,13 @@ const LoginPage = () => {
     setLoading(true);
     localStorage.setItem("session", JSON.stringify(loginData));
     toast.success(ToastMessages.loginSuccess);
-    <ToastContainer/>
+    <ToastContainer />
     setTimeout(() => {
       navigate(RoutingPaths.home);
     }, 1000);
   };
 
-  
+
 
   return (
     <div className="login__main-div">

@@ -143,3 +143,8 @@ label {
   margin-top: 4rem;
   margin-bottom: 3rem;
 }
+
+.input__valid:after {
+  content: " *";
+  color: var(--red-color);
+}
